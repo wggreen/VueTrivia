@@ -25,7 +25,11 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-color: black;
-  margin-top: 60px;
+}
+
+body {
+  margin: 0px;
+  background-image: url("./assets/background.jpg");
+  background-attachment: fixed;
 }
 </style>
