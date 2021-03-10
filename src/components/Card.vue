@@ -1,5 +1,8 @@
 <template>
-  <div class="card" :class="{ flipped: card.answerShown }">
+  <div
+    class="card"
+    :class="{ flipped: card.answerShown, rainbowCard: rainbow }"
+  >
     <div class="card-inner">
       <div class="question">
         <h4>{{ card.question }}</h4>
@@ -17,7 +20,7 @@
 
 <script>
 export default {
-  props: ["card"],
+  props: ["card", "rainbow"],
 
   methods: {
     handleClick() {
@@ -87,5 +90,31 @@ button {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto 60px;
+}
+
+.rainbowCard {
+  width: 300px;
+  height: 200px;
+  border: 1px solid #f1f1f1;
+  perspective: 1000px;
+  margin-top: 20px;
+  color: yellow;
+  background-image: linear-gradient(
+    to right,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    indigo,
+    red
+  );
+  animation: slidebg 2s linear infinite;
+}
+
+@keyframes slidebg {
+  to {
+    background-position: 20vw;
+  }
 }
 </style>

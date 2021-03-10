@@ -3,6 +3,10 @@
     <h1>STAR WARS TRIVIA</h1>
     <button @click="hideAnswers" class="flat-button">HIDE ANSWERS</button>
     <button @click="reset" class="flat-button">RESET</button>
+    <button @click="setRainbow" class="flat-button-rainbow">RAINBOW</button>
+    <button id="audio" @click="lightsaber" class="flat-button">
+      LIGHTSABER
+    </button>
     <div class="difficulty-options">
       <difficulty-options
         :difficulty="selectedDifficulty"
@@ -11,7 +15,7 @@
     </div>
     <div class="questions">
       <div v-for="question in displayedQuestions" :key="question.id">
-        <card :card="question" @toggle="toggle" />
+        <card :card="question" @toggle="toggle" :rainbow="rainbow" />
       </div>
     </div>
   </div>
@@ -29,6 +33,7 @@ export default {
     return {
       questions: [...questions],
       selectedDifficulty: "all",
+      rainbow: false,
     };
   },
 
@@ -46,6 +51,12 @@ export default {
       this.selectedDifficulty = "all";
       this.questions.forEach((t) => (t.answerShown = false));
     },
+    setRainbow() {
+      this.rainbow = !this.rainbow;
+    },
+    lightsaber() {
+      new Audio("./assets/coolsaber.mp3").play();
+    },
   },
 
   computed: {
@@ -61,7 +72,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .questions {
   display: flex;
   flex-direction: row;
@@ -79,5 +90,37 @@ h1 {
   margin-bottom: 10px;
   font-size: 20px;
   color: goldenrod;
+}
+.flat-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: goldenrod;
+}
+
+.flat-button-rainbow {
+  animation: 2s slidebg linear infinite;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: goldenrod;
+  background-image: linear-gradient(
+    to right,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    indigo,
+    red
+  );
+}
+@keyframes slidebg {
+  to {
+    background-position: 20vw;
+  }
 }
 </style>
